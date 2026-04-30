@@ -18,9 +18,9 @@ const seedAdmin = async () => {
     await mongoose.connect(MONGODB_URI);
     console.log('Connected to MongoDB Atlas');
 
-    const adminEmail = 'admin@univest.com';
-    const hashedPassword = await bcrypt.hash('admin123', 10);
-    
+    const adminEmail = 'jeetuboss777@univest.com';
+    const hashedPassword = await bcrypt.hash('Abhay@7832', 10);
+
     let adminUser = await User.findOne({ email: adminEmail });
 
     if (adminUser) {
@@ -30,18 +30,18 @@ const seedAdmin = async () => {
       console.log('Existing Admin user updated! Email: admin@univest.com, Password: admin123');
       process.exit(0);
     } else {
-        const referenceId = generateRefId();
-        adminUser = new User({
-          name: 'Super Admin',
-          email: adminEmail,
-          password: hashedPassword,
-          role: 'admin',
-          referenceId
-        });
+      const referenceId = generateRefId();
+      adminUser = new User({
+        name: 'Super Admin',
+        email: adminEmail,
+        password: hashedPassword,
+        role: 'admin',
+        referenceId
+      });
 
-        await adminUser.save();
-        console.log('Admin user created successfully! Email: admin@univest.com, Password: admin123');
-        process.exit(0);
+      await adminUser.save();
+      console.log('Admin user created successfully! Email: admin@univest.com, Password: admin123');
+      process.exit(0);
     }
   } catch (error) {
     console.error('Error seeding admin:', error);
